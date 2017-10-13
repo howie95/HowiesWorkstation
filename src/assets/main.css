@@ -457,6 +457,12 @@ main {
     bottom: -57px;
     width: 600px;
 }
+.cover .scr5 .lightdesk{
+    position: absolute;
+    left: -50px;
+    bottom: -57px;
+    width: 600px;
+}
 .github .lightdesk .desktop {
     fill: #fffdf2;
 }
