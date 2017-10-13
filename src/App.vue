@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <main>
+        <div class="clicknav previous" @click="clickNext(false)"><span>&#60;</span></div>
+        <div class="clicknav next" @click="clickNext(true)"><span>&#62;</span></div>
         <transition-group class="bground" tag="div" name="bground">
             <div class="bground" v-for="(item,index) in navs" :key="index" :style="{backgroundColor: item.bgcolor}" v-if="currentIndex===index">
                 <div class="bgshadow"></div>
@@ -13,6 +15,17 @@
                 <path class="lampin cls-1" d="M215.26,432.91a43.23,43.23,0,0,0-2.91-3.8c-5.33-5-18.78-10.54-20.51-11a165,165,0,0,0-81.87-.48c-2,.49-25.34,8.18-25.34,17.3,0,6.2,13.45,12.55,19.62,15.2a37.59,37.59,0,0,0,5.72,1.95,165,165,0,0,0,81.87-.48,38.09,38.09,0,0,0,6.29-2.29c5.87-2.71,16.91-8.58,17.19-14.52q0-.92.07-1.87" transform="translate(-84.35 -31)"/>
                 <path class="lampbub cls-1" d="M128.54,414.15a16.91,16.91,0,0,0-.14,2.17c0,10.55,9.77,19.1,21.82,19.1s21.82-8.55,21.82-19.1a16.93,16.93,0,0,0-.12-2" transform="translate(-84.35 -31)"/>
             </svg>
+            <svg class="light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 285 226">
+                <defs>
+                    <linearGradient id="bug_light" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgb(255,248,196);
+                        stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:rgb(255,248,196);
+                        stop-opacity:0"/>
+                    </linearGradient>
+                </defs>
+                <polygon points="285 226 0 226 77 0 208 0 285 226" style="fill:url(#bug_light)"/>
+            </svg>
         </div>
         <div class="desksvg" :class="windowclass">
             <svg id="desk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 562.68 289">
@@ -23,11 +36,12 @@
                 <path class="scrin cls-1" d="M591.92,140a11.77,11.77,0,0,1,11.73,11.73V258.24A11.77,11.77,0,0,1,591.92,270H413.07a11.77,11.77,0,0,1-11.73-11.73V151.73A11.77,11.77,0,0,1,413.07,140H591.92" transform="translate(-118.66 -133.5)"/>
             </svg> 
             <div class="menu">
-                    <nav>
-                        <ul>
-                            <li v-for="(item,index) in navs" :key="index"><a @click="swichNav(item,index)">{{item.title}}</a></li>
-                        </ul>
-                    </nav>
+                <nav>
+                    <ul>
+                        <li v-for="(item,index) in navs" :key="index"><a @mouseenter="swichNav(item,index)">{{item.title}}</a></li>
+                    </ul>
+                </nav>
+                <div class="navbg"></div>
             </div>               
         </div>
         <div class="cover" :class="windowclass">
@@ -338,6 +352,29 @@
                         <path id="kbbtm" class="cls-2" d="M368.93,358.9v5c0,1.14-1.66,2.08-3.69,2.08H200.08c-2,0-3.69-.94-3.69-2.08v-5" transform="translate(-195.89 -321.5)"/>
                         <path id="kbtop" class="cls-1" d="M348.78,322c2,0,4.57,1.78,5.67,4l13.69,27.71c1.7,3.43,1,6.36-1.66,6.36H198.83c-2.64,0-3.09-2.92-1.07-6.36L214,326c1.32-2.24,4-4,6-4Z" transform="translate(-195.89 -321.5)"/>
                     </svg>
+                    <svg class="lightdesk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 562.68 289">
+                        <defs>
+                            <radialGradient id="light_mask" cx="50%" cy="50%" r="50%"
+                            fx="50%" fy="50%">
+                            <stop offset="0%" style="stop-color:rgb(255,255,255);
+                            stop-opacity:1"/>
+                            <stop offset="100%" style="stop-color:rgb(255,255,255);
+                            stop-opacity:0"/>
+                            </radialGradient>
+                            <mask id="mask">
+                                <ellipse cx="305.5" cy="207" rx="305.5" ry="167"style="fill:url(#light_mask)"/>
+                            </mask>
+                        </defs>
+                        <g mask="url(#mask)" id="desk">
+                            <path class="desktop" d="M511.75,774H609.5c6.6,0,15.13,4.2,19.08,9.51L677.32,849c6,8.12,4.15,15-4.45,15H127.13c-8.6,0-10.49-6.91-4.45-15l48.74-65.47c3.95-5.3,12.48-9.51,19.08-9.51H493.44" transform="translate(-118.66 -617.5)"/>
+                        </g>
+                        <g mask="url(#mask)" id="scr1">
+                            <path id="msbtm" class="cls-1" d="M440,837.42v3.29c0,.75-.23,1.36-.51,1.36l-23.16-.13c-.28,0-.52-.62-.52-1.37v-3.29" transform="translate(-118.66 -617.5)"/>
+                            <path id="mstop" class="cls-1" d="M433.69,813.91c.29,0,.81,1.13,1.18,2.56l4.53,17.62c.56,2.18.74,4,.36,4L416.18,838c-.37,0-.71-1.86-.75-4l-.32-17.6c0-1.43.19-2.55.47-2.55Z" transform="translate(-118.66 -617.5)"/>
+                            <path id="kbbtm" class="cls-1" d="M368.16,840.52v6c0,1.37-2,2.48-4.41,2.48H166.41c-2.43,0-4.41-1.12-4.41-2.48v-6" transform="translate(-118.66 -617.5)"/>
+                            <path id="kbtop" class="cls-1" d="M344.09,796.42c2.42,0,5.46,2.13,6.78,4.81l16.35,33.11c2,4.1,1.17,7.6-2,7.6H164.91c-3.16,0-3.69-3.49-1.28-7.6l19.43-33.11c1.57-2.68,4.8-4.81,7.23-4.81Z" transform="translate(-118.66 -617.5)"/>
+                        </g>
+                    </svg>
                 </div>
                 </transition>
             </div>
@@ -345,7 +382,7 @@
       </main>
       <footer>
           <div class="gitthis">
-              <a href="github.com">
+              <a href="https://github.com/howie95/HowiesWorkstation" target="_blank">
               <img src="./assets/github.png" alt="Git this page.">
               <p>Git this page.</p>
               </a>
@@ -358,6 +395,7 @@ export default {
     data(){
         return {
         screentext:"workstation",
+        isWriting:false,
         screencolor:"#69727e",
         showwindow:false,
         windowclass:"",
@@ -373,6 +411,22 @@ export default {
     }
     },
     methods:{
+        clickNext(e){
+            let i = this.currentIndex
+            if(e===true){
+                if(i===3){
+                    this.swichNav(this.navs[0],0)
+                }else{
+                    this.swichNav(this.navs[i+1],i+1)
+                }
+            }else{
+                if(i===-1||i===0){
+                    this.swichNav(this.navs[3],3)
+                }else{
+                    this.swichNav(this.navs[i-1],i-1)
+                }
+            }
+        },
         swichNav:function(item,index){
             if(index==this.currentIndex){
                 return
@@ -389,22 +443,29 @@ export default {
                 if(this.screentext.length>0){
                     this.screentext = this.screentext.substr(0, this.screentext.length - 1)
                     setTimeout(this.delScreen, 50)
+                    this.isWriting=false
                 }else{
+                    this.isWriting=true
                     this.writeScreen()
                 }       
             }else{
+                this.isWriting=false
                 this.navalt=e
                 this.screentext = this.screentext.substr(0, this.screentext.length - 1)
                 setTimeout(this.delScreen, 50)
             }
         },
         writeScreen:function(){
-          if(this.screentext.length<this.navalt.length){
-            this.screentext =this.navalt.slice(0, this.screentext.length+1)
-            setTimeout(this.writeScreen, 50)
-          }else{
-            this.navalt=""
-          }
+            if(this.isWriting==true){
+                if(this.screentext.length<this.navalt.length){
+                this.screentext =this.navalt.slice(0, this.screentext.length+1)
+                setTimeout(this.writeScreen, 50)
+                }else{
+                    this.navalt=""
+                }
+            }else{
+                return
+            }
         },
     }
 }

@@ -16,6 +16,36 @@ main {
     background: -webkit-linear-gradient( #f1f1f1 90%, #e2e2e2 90%,#e2e2e2 100%);
     overflow: hidden;
 }
+.clicknav {
+    z-index: 999;
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    cursor: pointer;
+}
+.clicknav span{
+    position: relative;
+    top: 45%;
+    display: block;
+    width: 40px;
+    font-size: 50px;
+    color: rgba(0, 0, 0, 0.1);
+    margin: 0 25px;
+    transition: .5s ease-in;
+}
+.clicknav:hover span{
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0 10px;
+}
+.previous {
+    left: 0;
+}
+.next{
+    right: 0;
+}
+.next span{
+    float: right;
+}
 .bground {
     position: absolute;
     top: 0;
@@ -51,16 +81,9 @@ main {
     width: 70px;
     top: -50px;
     transform-origin: center top;
-    transform: rotate(15deg);
-    animation: lamp 5s ease-in-out infinite alternate;
+    transform: rotate(0deg);
 }
-@keyframes lamp{
-    from{
-        transform: rotate(15deg);
-    }to{
-        transform: rotate(-15deg);
-    }
-}
+
 .lampsvg svg {
     padding: 5px;
 }
@@ -70,19 +93,29 @@ main {
     stroke-miterlimit: 10;
     transition: .5s linear;
 }
-.lampmain {
+.lampsvg .lampmain {
     transition: .5s linear;
     fill: #b6b6b6;
 }
-.lampin {
+.lampsvg .lampin {
     fill: #e2e2e2;
     transition: .5s linear;
+    stroke: none;
 }
-.lampbub {
+.lampsvg .lampbub {
     fill: #f5f5f5;
     transition: .5s linear;
+    stroke: none;
 }
-
+.light {
+    position: relative;
+    z-index: -1;
+    top: -25px;
+    left: -40px;
+    width: 150px;
+    opacity: 0;
+    transition: 1s linear;
+}
 
 .desksvg {
     position: absolute;
@@ -134,11 +167,22 @@ main {
 }
 .desksvg .menu {
     position: absolute;
-    bottom: -5px;
+    bottom: -7px;
     width: 100%;
     height: 45px;
     z-index: 999;
     animation: fadeIn 1s linear;
+    overflow: hidden;
+}
+.desksvg .menu .navbg{
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: -80px;
+    width: 80px;
+    height: 45px;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: .5s ease-in-out;
 }
 .desksvg .menu ul{
     display: flex;
@@ -150,6 +194,7 @@ main {
     display: inline-block;
 }
 .desksvg .menu ul li a{
+    display: inline-block;
     line-height: 45px;
     font-size: 15px;
     text-decoration: none;
@@ -255,6 +300,9 @@ main {
 .blog .lampbub{
     fill: #f5efd3;
 }
+.blog .menu .navbg{
+    left: 43px;
+}
 
 .gallery .window .windowin {
     top: -170px;
@@ -289,6 +337,12 @@ main {
 }
 .gallery .lampbub{
     fill: #f6eb9d;
+}
+.gallery .window .windowtop {
+    fill: #f8e99e;
+}
+.gallery .menu .navbg{
+    left: 173px;
 }
 
 .about .window .windowin {
@@ -325,7 +379,19 @@ main {
 .about .lampbub{
     fill: #8794ae;
 }
+.about .window .windowtop {
+    fill: #a4acba;
+}
+.about .window .windowbtm {
+    fill: #d0d8e8;
+}
+.about .menu .navbg{
+    left: 313px;
+}
 
+.github .menu .navbg{
+    left: 465px;
+}
 .github .window .windowin {
     top: 0px;
     left: -10px;
@@ -343,7 +409,7 @@ main {
     fill: #616474;
 }
 .github .menu ul li a {
-    color: #999367;
+    color: #dbdbdb;
 }
 .github .window .sky {
     fill: #61718c;
@@ -360,10 +426,10 @@ main {
     width: 150px;
 }
 .github .desktop {
-    fill: #fff8c4;
+    fill: #828282;
 }
 .github .deskbtm {
-    fill:#f7efb1;
+    fill:#555554;
 }
 .github .cls-1{
     stroke: #828282;
@@ -372,10 +438,60 @@ main {
     fill: #828282;
 }
 .github .lampin{
+    stroke: none;
     fill: #fff8c4;
 }
 .github .lampbub{
+    stroke: none;
     fill: #ffefa7;
+}
+.github .window .windowtop {
+    fill: #a2a189;
+}
+.github .light{
+    opacity: 1;
+}
+.github .lightdesk{
+    position: absolute;
+    left: -50px;
+    bottom: -57px;
+    width: 600px;
+}
+.github .lightdesk .desktop {
+    fill: #fffdf2;
+}
+.github #scr1{
+    position: relative;
+    width: 296px;
+    left: -3px;
+}
+.github .lightdesk #kbtop,
+.github .lightdesk #mstop{
+    fill: #afafaf;
+    stroke: #acacac;
+    stroke-width: 1px;
+}
+.github .lightdesk ellipse{
+    transform-origin: center bottom;
+    transform:translateX(-80px);
+    animation: mask 5s ease-in-out infinite alternate;
+}
+.bground+.github{
+    animation: lamp 5s ease-in-out infinite alternate;
+}
+@keyframes lamp{
+    from{
+        transform: rotate(15deg);
+    }to{
+        transform: rotate(-15deg);
+    }
+}
+@keyframes mask{
+    from{
+        transform:translateX(-80px);
+    }to{
+        transform:translateX(80px);
+    }
 }
 
 .cover .screen {
@@ -773,14 +889,14 @@ main {
     left: 250px;
 }
 .desk .scr5 svg path{
-    stroke: #ccbea3;
+    stroke: #555555;
     stroke-width: 1px;
 }
 .desk .scr5 svg .cls-1{
-    fill: white;
+    fill: #555555;
 }
 .desk .scr5 svg .cls-2{
-    fill: #FDFDDD;
+    fill: #828282;
 }
 
 footer{
