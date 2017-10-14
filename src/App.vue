@@ -80,7 +80,7 @@
             <div class="screen" :style="{backgroundColor: this.screencolor}">
                 <div class="scr1">
                     <h1>Howie's</h1>
-                    <h2>{{screentext}}</h2>
+                    <h2 v-typingit="screen">workstation</h2>
                     <span></span>
                 </div>
             </div>
@@ -394,6 +394,12 @@
 export default {
     data(){
         return {
+        screen:{
+            texts:[],
+            speed:50,
+            spacebefore:0,
+            spaceafter:0
+        },
         screentext:"workstation",
         isWriting:false,
         screencolor:"#69727e",
@@ -428,43 +434,14 @@ export default {
             }
         },
         swichNav:function(item,index){
-            if(index==this.currentIndex){
+            if(index===this.currentIndex){
                 return
             }else{
                 this.showwindow=true
                 this.windowclass=item.class
                 this.currentIndex=index
-                this.delScreen(item.alt)
+                this.screen.texts[0]=item.alt
                 this.screencolor=item.color
-            }
-        },
-        delScreen:function(e){
-            if(!e){
-                if(this.screentext.length>0){
-                    this.screentext = this.screentext.substr(0, this.screentext.length - 1)
-                    setTimeout(this.delScreen, 50)
-                    this.isWriting=false
-                }else{
-                    this.isWriting=true
-                    this.writeScreen()
-                }       
-            }else{
-                this.isWriting=false
-                this.navalt=e
-                this.screentext = this.screentext.substr(0, this.screentext.length - 1)
-                setTimeout(this.delScreen, 50)
-            }
-        },
-        writeScreen:function(){
-            if(this.isWriting==true){
-                if(this.screentext.length<this.navalt.length){
-                this.screentext =this.navalt.slice(0, this.screentext.length+1)
-                setTimeout(this.writeScreen, 50)
-                }else{
-                    this.navalt=""
-                }
-            }else{
-                return
             }
         },
     }
