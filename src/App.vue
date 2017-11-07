@@ -38,7 +38,7 @@
             <div class="menu">
                 <nav>
                     <ul>
-                        <li v-for="(item,index) in navs" :key="index"><a @mouseenter="swichNav(item,index)">{{item.title}}</a></li>
+                        <li v-for="(item,index) in navs" :key="index"><a @mouseenter="swichNav(item,index)" :href="item.link">{{item.title}}</a></li>
                     </ul>
                 </nav>
                 <div class="navbg"></div>
@@ -407,10 +407,10 @@ export default {
         windowclass:"",
         navIndex:0,
         navs:[
-            {title:"博客",link:"",alt:"Hello World!",color:"#679d70",bgcolor:"#f9f5d5",class:"blog"},
-            {title:"画廊",link:"",alt:"Amazing photos.",color:"#9b7494",bgcolor:"#fff2b1",class:"gallery"},
-            {title:"个人介绍",link:"",alt:"Informations.",color:"#7188b3",bgcolor:"#7e848e",class:"about"},
-            {title:"GitHub",link:"",alt:"git@howie95/",color:"#575757",bgcolor:"#555554",class:"github"}
+            {title:"博客",link:"https://howie95.com/blog",alt:"Hello World!",color:"#679d70",bgcolor:"#f9f5d5",class:"blog"},
+            {title:"画廊",link:"https://photo.howie95.com/",alt:"Amazing photos.",color:"#9b7494",bgcolor:"#fff2b1",class:"gallery"},
+            {title:"个人介绍",link:"https://howie95.com/about.html",alt:"Informations.",color:"#7188b3",bgcolor:"#7e848e",class:"about"},
+            {title:"GitHub",link:"https://github.com/howie95/",alt:"git@howie95/",color:"#575757",bgcolor:"#555554",class:"github"}
         ],
         navalt:"",
         currentIndex:-1,
